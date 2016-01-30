@@ -3,8 +3,8 @@ class Rook implements ChessPiece{
 	private PieceContainer thisPiece;
 
 
-	Rook(Color color, Coordinate location, Board board, boolean moved){
-		thisPiece = new ChessPiece(color, location, board, "Rook");
+	Rook(Side side, Coordinate location, Board board, boolean moved){
+		thisPiece = new ChessPiece(side, location, board, "Rook");
 		this.moved = moved;
 	}
 	public int movePiece(Coordinate newLocation){
@@ -17,14 +17,16 @@ class Rook implements ChessPiece{
 			return 1; //location not a part of the valid moveset
 		}
 	}
-
-	public void getMoveSet(){
+	public int capturePiece(ChessPiece capturedPiece){
+		return 0;
+	}
+	public Coordinate[] getMoveSet(){
 		//send next space forward to view
 		if(!hasMoved()){
 			//send space after that to view
 		}
 	}
-	public void getCaptureSet(){
+	public Coordinate[] getCaptureSet(){
 		//send diagonals of pawn to view
 	}
 	public boolean checkCapture(Coordinate location){
@@ -36,8 +38,8 @@ class Rook implements ChessPiece{
 
 	//getters and setters
 
-	public Color getColor(){
-		return thisPiece.getColor();
+	public Side getSide(){
+		return thisPiece.getSide();
 	}
 	public Coordinate getLocation(){
 		return thisPiece.getLocation();
@@ -50,8 +52,8 @@ class Rook implements ChessPiece{
 	}
 
 
-	public void setColor(Color color){
-		thisPiece.setColor(color);
+	public void setSide(Side side){
+		thisPiece.setSide(side);
 	}
 	public void setLocation(Coordinate newLocation){
 		thisPiece.setLocation(newLocation);

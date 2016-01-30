@@ -6,5 +6,12 @@ public class Controller{
 	void init(){
 		gameBoard.init();
 	}
-	
+	int runGame(Player playerOne, Player playerTwo){
+		While(true){
+			playerOne.play();
+			
+			playerTwo.play();
+		}
+		return 0;
+	}
 }

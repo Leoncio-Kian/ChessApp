@@ -1,7 +1,4 @@
 interface ChessPiece{
-	public enum Color {
-		BLACK, WHITE
-	}
 
 	public int movePiece(Coordinate newLocation);
 	public int capturePiece(ChessPiece enemyPiece){
@@ -10,14 +7,14 @@ interface ChessPiece{
 		//update view with a capture;
 		
 	}
-	void getMoveSet();
-	void getCaptureSet();
+	Coordinate[] getMoveSet();
+	Coordinate[] getCaptureSet();
 	public boolean checkCapture(Coordinate location);
 	public boolean checkMove(Coordinate newLocation);
 
 	//getters and setters
-	public Color getColor();
-	public void setColor(Color color);
+	public Side getSide();
+	public void setSide(Side side);
 
 	public Coordinate getLocation();
 	public void setLocation(Coordinate location);

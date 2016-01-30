@@ -1,23 +1,23 @@
 class PieceContainer{
-	public enum Color {
-		BLACK, WHITE
+	public enum Side {
+		Black, White
 	}
-	private Color color;
+	private Side side;
 	private Coordinate location;
 	private Board board;
 	private String name;
 
 	//constructor
-	PieceContainer(Color color, Coordinate location, Board board, String name){
-		this.color = color;
+	PieceContainer(Side side, Coordinate location, Board board, String name){
+		this.side = side;
 		this.location = location;
 		this.board = board;
 		this.name = name;
 	}
 
 	//getters and setters
-	public Color getColor(){
-		return color;
+	public Side getSide(){
+		return side;
 	}
 	public Coordinate getLocation(){
 		return location;
@@ -26,8 +26,8 @@ class PieceContainer{
 		return name;
 	}
 
-	public void setColor(Color color){
-		this.color = color;
+	public void setSide(Side side){
+		this.side = side;
 	}
 	public void setLocation(Coordinate location){
 		this.location = location;

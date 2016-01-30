@@ -2,8 +2,8 @@ class Pawn implements ChessPiece{
 	private boolean moved;
 	private PieceContainer thisPiece;
 	
-	Pawn(Color color, Coordinate location, Board board, boolean moved){
-		thisPiece = new ChessPiece(color, location, board, "Pawn");
+	Pawn(Side side, Coordinate location, Board board, boolean moved){
+		thisPiece = new ChessPiece(side, location, board, "Pawn");
 		this.moved = moved;
 	}
 	public int movePiece(Coordinate newLocation){
@@ -16,14 +16,16 @@ class Pawn implements ChessPiece{
 			return 1; //location not a part of the valid moveset
 		}
 	}
-
-	public void getMoveSet(){
+	public int capturePiece(ChessPiece capturedPiece){
+		return 0;
+	}
+	public Coordinate[] getMoveSet(){
 		//send next space forward to view
 		if(!hasMoved()){
 			//send space after that to view
 		}
 	}
-	public void getCaptureSet(){
+	public Coordinate[] getCaptureSet(){
 		//send diagonals of pawn to view
 	}
 	public boolean checkCapture(Coordinate location){
@@ -35,8 +37,8 @@ class Pawn implements ChessPiece{
 
 	//getters and setters
 
-	public Color getColor(){
-		return thisPiece.getColor();
+	public Side getSide(){
+		return thisPiece.getSide();
 	}
 	public Coordinate getLocation(){
 		return thisPiece.getLocation();
@@ -48,8 +50,8 @@ class Pawn implements ChessPiece{
 		return moved;
 	}
 
-	public void setColor(Color color){
-		thisPiece.setColor(color);
+	public void setSide(Side side){
+		thisPiece.setSide(side);
 	}
 	public void setLocation(Coordinate newLocation){
 		thisPiece.setLocation(newLocation);

@@ -1,10 +1,8 @@
 class Player{
-	public enum Color {
-		BLACK, WHITE
-	}
-	Color color;
-	Player(Color color){
-		this.color = color;
+
+	Side side;
+	Player(Side side){
+		this.side = side;
 	}
 	public int movePiece(int row, int column){
 		
