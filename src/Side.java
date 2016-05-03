@@ -1,8 +1,0 @@
-/**
- * Created by leonc on 2/7/2016.
- */
-/*
-public class Side {
-    Side
-}
-*/
