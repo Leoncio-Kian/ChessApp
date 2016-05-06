@@ -7,7 +7,7 @@ import MovementPackage.MoveCommand;
 /**
  * Created by leonc on 2/13/2016.
  */
-public class King extends ChessPiece {
+public class King extends Piece {
     private boolean hasMoved;
     public King(Color color, Coordinate location){
         super.color = color;

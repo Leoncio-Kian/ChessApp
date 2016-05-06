@@ -7,7 +7,7 @@ import MovementPackage.MoveCommand;
 /**
  * Created by leonc on 2/13/2016.
  */
-public class Knight extends ChessPiece {
+public class Knight extends Piece {
 
     public Knight(Color color, Coordinate location){
         this.color = color;

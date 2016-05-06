@@ -7,7 +7,7 @@ import MovementPackage.MoveCommand;
 /**
  * Created by leonc on 2/13/2016.
  */
-public class Bishop extends ChessPiece {
+public class Bishop extends Piece {
 
     public Bishop(Color color, Coordinate location){
         super.color = color;

@@ -7,7 +7,7 @@ import MovementPackage.MoveCommand;
 /**
  * Created by leonc on 2/13/2016.
  */
-public class Rook extends ChessPiece {
+public class Rook extends Piece {
     private boolean hasMoved;
     public Rook(Color color, Coordinate location){
         this.color = color;

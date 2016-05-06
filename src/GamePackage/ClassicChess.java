@@ -9,7 +9,7 @@ import ChessPiecePackage.*;
 public class ClassicChess implements Game{
     private Player WhitePlayer;
     private Player BlackPlayer;
-    private ChessPiece gameBoard[][];
+    private Piece gameBoard[][];
     //private GameView gameView;
 
     //the following are constants.
@@ -21,7 +21,7 @@ public class ClassicChess implements Game{
 
 
     public ClassicChess(){
-        this.gameBoard = new Coordinate[BoardLength][BoardLength];
+        this.gameBoard = new Piece[BoardLength][BoardLength];
     }
     public void play(){
 
@@ -101,7 +101,7 @@ public class ClassicChess implements Game{
     public Piece getChessPiece(Coordinate loc){
         return board[loc.getX()][loc.getY()];
     }
-    public void setChessPiece(ChessPiece piece){
+    public void setChessPiece(Piece piece){
         assert piece != null;
         assert piece.getLocation() != null;
 

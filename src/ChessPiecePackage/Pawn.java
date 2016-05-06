@@ -6,7 +6,7 @@ import MovementPackage.MoveCommand;
 /**
  * Created by leonc on 2/8/2016.
  */
-public class Pawn extends ChessPiece {
+public class Pawn extends Piece {
     private boolean hasMoved;
     private boolean enPassant;
     private Direction direction;
