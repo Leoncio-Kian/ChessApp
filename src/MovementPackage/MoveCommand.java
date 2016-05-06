@@ -1,6 +1,6 @@
 package MovementPackage;
 
-import ChessPieces.ChessPiece;
+import ChessPiecePackage.*;
 import UtilitiesPackage.Coordinate;
 
 /**
@@ -9,17 +9,17 @@ import UtilitiesPackage.Coordinate;
 public abstract class MoveCommand {
     private Coordinate startLoc;
     private Coordinate endLoc;
-    private ChessPiece piece;
+    private Piece piece;
 
     public void setStartLoc(Coordinate startLoc){ this.startLoc = startLoc;}
     public void setStartLoc(int row, int column ){ this.startLoc.setCoordinate(row, column);}
     public void setEndLoc(Coordinate endLoc){ this.endLoc = endLoc;}
     public void setEndLoc(int row, int column){ this.endLoc.setCoordinate(row, column);}
-    public void setChessPiece(ChessPiece piece){ this.piece = piece};
+    public void setChessPiece(Piece piece){ this.piece = piece;}
 
     public Coordinate getStartLoc(){ return startLoc;}
     public Coordinate getEndLoc(){ return endLoc;}
-    public ChessPiece getPiece(){ return piece;}
+    public Piece getPiece(){ return piece;}
 
     public abstract void execute();
     public abstract void undo();

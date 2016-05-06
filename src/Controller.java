@@ -1,3 +1,4 @@
+import BoardPackage.GameBoardState;
 import PlayerPackage.Player;
 import UtilitiesPackage.Color;
 import UtilitiesPackage.Coordinate;
