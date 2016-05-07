@@ -1,7 +1,7 @@
 package ChessPiecePackage;
 
 import UtilitiesPackage.*;
-import MovementPackage.MoveCommand;
+//import MovementPackage.MoveCommand;
 
 /**
  * Created by leonc on 2/8/2016.
@@ -26,14 +26,14 @@ public class Pawn extends Piece {
         this.direction = direction;
     }
 
-    public int MovePiece(MoveCommand moveCommand){
-        return 0;
-    }
+//    public int MovePiece(MoveCommand moveCommand){
+//        return 0;
+//    }
     public boolean getHasMoved(){ return hasMoved; }
     public boolean getEnPassant(){ return enPassant; }
     public Direction getDirection(){ return direction; }
     public void setHasMoved(boolean hasMoved){ this.hasMoved = hasMoved; }
     public void setEnPassant(boolean enPassant){ this.enPassant = enPassant; }
     public void setDirection(Direction direction){ this.direction = direction; }
-
+    public String toString(){ return "Pn";}
 }

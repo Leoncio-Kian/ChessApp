@@ -2,7 +2,7 @@ package ChessPiecePackage;
 
 import UtilitiesPackage.Color;
 import UtilitiesPackage.Coordinate;
-import MovementPackage.MoveCommand;
+//import MovementPackage.MoveCommand;
 
 /**
  * Created by leonc on 2/7/2016.
@@ -14,8 +14,14 @@ public abstract class Piece {
     protected Color color;
     protected Coordinate location;
 
-    public abstract int MovePiece(MoveCommand moveCommand);
+//    public abstract int MovePiece(MoveCommand moveCommand);
 
+    public void updateLocation(int row, int column) {
+        setLocation(row, column);
+    }
+    public void updateLocation(Coordinate newLoc){
+        setLocation(newLoc.getRow(), newLoc.getColumn());
+    }
     public Color getColor(){
         return color;
     }
@@ -25,5 +31,5 @@ public abstract class Piece {
     public Coordinate getLocation(){ return location;}
     public void setLocation(Coordinate location){ this.location = location;}
     public void setLocation(int row, int column){ location.setCoordinate(row, column);}
-
+    public abstract String toString();
 }

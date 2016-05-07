@@ -1,21 +1,21 @@
 package GamePackage;
 
 import UtilitiesPackage.*;
-import PlayerPackage.Player;
+//import PlayerPackage.Player;
 import ChessPiecePackage.*;
 /**
  * Created by leonc on 2/13/2016.
  */
 public class ClassicChess implements Game{
-    private Player WhitePlayer;
-    private Player BlackPlayer;
+//    private Player WhitePlayer;
+//    private Player BlackPlayer;
     private Piece gameBoard[][];
     //private GameView gameView;
 
     //the following are constants.
     private final int BoardLength = 8;
-    private final Color White = Color.White;
-    private final Color Black = Color.Black;
+    private final Color White = Color.WHITE;
+    private final Color Black = Color.BLACK;
     private final Direction Up = Direction.UP;
     private final Direction Down = Direction.DOWN;
 
@@ -36,11 +36,11 @@ public class ClassicChess implements Game{
         //this method assumes that the gameBoard is initialized
         assert gameBoard != null;
 
-        for(int i = 0; i < BoardLength; i++ ){
-            setChessPiece(new Pawn( White, new Coordinate(1,i), Up));
-            setChessPiece(new Pawn( Black, new Coordinate(6,i), Down));
-            for(int j = 2; j < 6; j++){
-                removeChessPiece();
+        for(int column = 0; column < BoardLength; column++ ){
+            setChessPiece(new Pawn( White, new Coordinate(1,column), Up));
+            setChessPiece(new Pawn( Black, new Coordinate(6,column), Down));
+            for(int row = 2; row < 6; row++){
+                removeChessPiece(new Coordinate(row, column));
             }
         }
         setChessPiece( new Rook(White, new Coordinate(0,0)) );
@@ -64,50 +64,95 @@ public class ClassicChess implements Game{
         setChessPiece( new Queen(Black, new Coordinate(7,3)) );
     }
     public boolean checkChessPiece(Coordinate loc){
+        assert ValidCoordinate(loc);
 
-        boolean check = checkValidCoordinate(loc);
-        assert check;
-
-        if(gaemBoard[loc.getRow()][loc.getColumn()] == null)
-            return false;
-        else
-            return true;
+        return gameBoard[loc.getRow()][loc.getColumn()] == null;
     }
     public void removeChessPiece(Coordinate loc){
-
-        boolean check = checkValidCoordinate(loc);
-        assert check;
+        assert ValidCoordinate(loc);
 
         gameBoard[loc.getRow()][loc.getColumn()] = null;
 
     }
-    public boolean checkValidCoordinate(Coordinate loc){
+    public boolean ValidCoordinate(Coordinate loc){
         if(loc == null)
             return false;
         if(loc.getRow() < 0 || loc.getRow() > 7 || loc.getColumn() < 0 || loc.getColumn() > 7)
-            return false;
+            throw new IllegalArgumentException();
         return true;
     }
     public int moveChessPiece(Coordinate startLoc, Coordinate endLoc){
-        if(!checkValidCoordinate(startLoc) || !checkValidCoordinate(endLoc))
-            return -1;
+        //check to make sure that the starting and ending coordinates are valid
+        if(!ValidCoordinate(startLoc) || !ValidCoordinate(endLoc))
+            return 1;
+        //check to make sure that there is a chess piece in the starting coordinates.
         if(!checkChessPiece(startLoc))
-            return -2;
-
-        setChessPiece(endLoc, getChessPiece(startLoc));
+            return 2;
+        //The chess piece is obtained from the start coordinates.
+        Piece chessPiece = getChessPiece(startLoc);
+        //the chess piece has its location updated FIRST.
+        chessPiece.updateLocation(endLoc);
+        //the chess piece is moved to the new location.
+        setChessPiece(endLoc, chessPiece);
+        //the chess piece is removed from the old location.
         removeChessPiece(startLoc);
         return 0;
     }
     public Piece getChessPiece(Coordinate loc){
-        return board[loc.getX()][loc.getY()];
+        return gameBoard[loc.getRow()][loc.getColumn()];
     }
-    public void setChessPiece(Piece piece){
+    public void setChessPiece(Coordinate endLoc, Piece piece){
+        assert piece != null;
+        assert endLoc != null;
+        assert endLoc.getRow() == piece.getLocation().getRow() && endLoc.getColumn() == piece.getLocation().getColumn();
+
+        gameBoard[endLoc.getRow()][endLoc.getColumn()] = piece;
+
+    }
+    //alternate setChessPiece method for initialization of pieces.
+    public void setChessPiece(Piece piece) {
         assert piece != null;
         assert piece.getLocation() != null;
 
-        Coordinate loc = piece.getLocation();
-        gameBoard[loc.getRow()][loc.getColumn()] = piece;
+        //get the end location from the chess piece.
+        Coordinate endLoc = piece.getLocation();
+        //it will put a chesspiece in the location it is in.
+        gameBoard[endLoc.getRow()][endLoc.getColumn()] = piece;
+
 
     }
+//The following is an example main i used to unit test the gameboard and related parts.
+
+    public static void main(String[] args) {
+        ClassicChess classicChessGame = new ClassicChess();
+        UnitTest test = new UnitTest();
+        test.printBoard(classicChessGame);
+        classicChessGame.moveChessPiece(new Coordinate(1,1), new Coordinate(2, 1));
+        test.printBoard(classicChessGame);
+        classicChessGame.initializeBoard();
+        test.printBoard(classicChessGame);
+//        System.out.println(classicChessGame.ValidCoordinate(new Coordinate(9,0)));
+//        System.out.println(classicChessGame.ValidCoordinate(new Coordinate(-1, 3)));
+//        System.out.println(classicChessGame.ValidCoordinate(new Coordinate(3,34)));
+//        System.out.println( classicChessGame.ValidCoordinate(new Coordinate(5, -3)));
+    }
+
+
 }
-// two sets of getters and setters, one for inclass stuff and one for out of class stuff.
+
+// The following is a class used in conjunction with the sample main above to test the gameboard design.
+class UnitTest{
+    public void printBoard(ClassicChess board){
+        for(int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                Piece iter = board.getChessPiece(new UtilitiesPackage.Coordinate(row, column));
+                if(iter != null)
+                    System.out.print( "[" + iter.toString() + "]");
+                else
+                    System.out.print("[  ]");
+            }
+            System.out.println();
+        }
+        System.out.println("\n");
+    }
+}
